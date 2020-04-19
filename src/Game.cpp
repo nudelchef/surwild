@@ -9,9 +9,9 @@
 SDL_Renderer* Game::renderer = nullptr;
 
 
-Camera* camera = nullptr;
-Map* map = nullptr;
-Player* player = nullptr;
+Camera* Game::camera = nullptr;
+Map* Game::map = nullptr;
+Player* Game::player = nullptr;
 
 
 

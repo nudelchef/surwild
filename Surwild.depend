@@ -71,7 +71,7 @@
 
 1587293657 /media/nudelchef/workspace/dev/c/workspace/surwild/include/Camera.h
 
-1587294065 /media/nudelchef/workspace/dev/c/workspace/surwild/include/Game.h
+1587294856 /media/nudelchef/workspace/dev/c/workspace/surwild/include/Game.h
 	<SDL/SDL.h>
 	<SDL2/SDL.h>
 
@@ -100,7 +100,7 @@
 
 1586708709 /media/nudelchef/workspace/dev/c/workspace/surwild/include/Direction.h
 
-1587294237 source:/media/nudelchef/workspace/dev/c/workspace/surwild/src/Game.cpp
+1587294869 source:/media/nudelchef/workspace/dev/c/workspace/surwild/src/Game.cpp
 	"Game.h"
 	<iostream>
 	"Camera.h"
