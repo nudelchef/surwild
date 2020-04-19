@@ -2,12 +2,12 @@
 
 const int camera_speed = 5;
 
-Camera::Camera(int width, int height)
+Camera::Camera(int width_, int height_)
 {
-    this->x = 0;
-    this->y = 0;
-    this->width = width;
-    this->height = height;
+    x = 0;
+    y = 0;
+    width = width_;
+    height = height_;
 }
 
 Camera::~Camera()

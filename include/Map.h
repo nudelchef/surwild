@@ -42,6 +42,11 @@ private:
 
     void setMapProperty(std::string object_name, std::string object_data);
 
+    void setPropertyMapName(std::string object_data);
+    void setPropertyMapDimension(std::string object_data);
+    void setPropertyMapAtlas(std::string object_data);
+    void setPropertyMapData(std::string object_data);
+
 };
 
 #endif // MAP_H_INCLUDED

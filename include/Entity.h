@@ -55,11 +55,11 @@ class Entity
             Entity::texture = texture;
         }
 
-        void setFrameOrder(int *frameOrder, int size)
+        void setFrameOrder(int *frameOrder_, int size)
         {
             for (int i = 0 ; i < size ; i++)
             {
-                this->frameOrder[i] = frameOrder[i];
+                frameOrder[i] = frameOrder_[i];
             }
             maxFrames = size;
         }

@@ -1,7 +1,5 @@
 #include "Game.h"
 
-Game *game = nullptr;
-
 int main( int argc, char* args[] )
 {
     const int FPS = 60;
@@ -10,7 +8,7 @@ int main( int argc, char* args[] )
     Uint32 frameStart;
     int frameTime;
 
-    game = new Game();
+    Game* game = new Game();
     game->init("Surwild", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 960, false);
 
     while(game->running())

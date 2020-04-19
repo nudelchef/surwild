@@ -21,10 +21,10 @@ class Camera
             return y;
         }
 
-        void set(int x, int y)
+        void set(int x_, int y_)
         {
-            this->x = x - width * 0.5;
-            this->y = y - height * 0.5;
+            x = x_ - width * 0.5;
+            y = y_ - height * 0.5;
         }
 
         void update();
