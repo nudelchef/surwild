@@ -11,13 +11,11 @@
 
 #include <SDL2/SDL_image.h>
 
-#include "Camera.h"
-#include "Map.h"
+class Camera;
+class Map;
+class Player;
 
 extern const Uint8* keys;
-
-extern Camera* camera;
-extern Map* map;
 
 class Game
 {
@@ -34,6 +32,10 @@ class Game
         bool running() { return isRunning; }
 
         static SDL_Renderer *renderer;
+
+        static Camera* camera;
+        static Map* map;
+        static Player* player;
 
     protected:
 

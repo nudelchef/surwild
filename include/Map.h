@@ -6,11 +6,6 @@
 #include <map>
 #include <string>
 
-class Map;
-
-#include "StringUtils.h"
-
-#include "Game.h"
 #include "TextureManager.h"
 
 class Map

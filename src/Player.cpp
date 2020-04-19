@@ -1,5 +1,7 @@
 #include "Player.h"
 
+#include "Camera.h"
+
 Player::Player()
 {
     setTexture(TextureManager::LoadTexture("assets/naey_spritesheet.png"));
@@ -30,7 +32,7 @@ void Player::update()
         move(Direction::RIGHT);
     }
 
-    camera->set(getCenterX(), getCenterY());
+    Game::camera->set(getCenterX(), getCenterY());
 
     Entity::update();
 }

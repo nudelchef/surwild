@@ -1,5 +1,7 @@
 #include "Camera.h"
 
+#include "Game.h"
+
 const int camera_speed = 5;
 
 Camera::Camera(int width_, int height_)

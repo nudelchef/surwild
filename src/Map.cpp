@@ -1,5 +1,8 @@
 #include "Map.h"
 
+#include "Camera.h"
+#include "StringUtils.h"
+
 Map::Map()
 {
     char const *mapName = "maps/plainfield_compressed";
@@ -99,8 +102,8 @@ void Map::renderMap()
         {
             type = map[y * mapWidth + x];
 
-            dest.x = x * dest.w - camera->getX();
-            dest.y = y * dest.h - camera->getY();
+            dest.x = x * dest.w - Game::camera->getX();
+            dest.y = y * dest.h - Game::camera->getY();
 
             TextureManager::render(map_atlas[type], src, dest);
         }

@@ -10,37 +10,8 @@ class Entity
         Entity();
         virtual ~Entity();
 
-        virtual void update()
-        {
-            if (isMoving)
-            {
-                updateMovement();
-
-                animationTime++;
-                while (animationTime >= animationDuration)
-                {
-                    animationTime-=animationDuration;
-
-                    atFrame++;
-                    if (atFrame >= maxFrames)
-                        atFrame = 0;
-                    src.y = frameOrder[atFrame] * src.h;
-                }
-            } else {
-                src.y = 0;
-            }
-        }
-
-        virtual void render()
-        {
-            SDL_Rect render_dest;
-            render_dest.x = dest.x - camera->getX();
-            render_dest.y = dest.y - camera->getY() - 2; // Every entity should be rendered to pixels up
-            render_dest.w = dest.w;
-            render_dest.h = dest.h;
-
-            TextureManager::render(texture, src, render_dest);
-        }
+        virtual void update();
+        virtual void render();
 
         int getX() { return dest.x; }
 
@@ -50,10 +21,7 @@ class Entity
 
         int getCenterY() { return dest.y + (dest.h >> 1); }
 
-        void setTexture(SDL_Texture *texture)
-        {
-            Entity::texture = texture;
-        }
+        void setTexture(SDL_Texture *texture_) { texture = texture_; }
 
         void setFrameOrder(int *frameOrder_, int size)
         {
@@ -88,7 +56,8 @@ class Entity
         SDL_Point* tilePosition;
         int distanceLeft;
 
-        SDL_Rect src, dest;
+        SDL_Rect src;
+        SDL_Rect dest;
         SDL_Texture* texture;
 
         void updateMovement();

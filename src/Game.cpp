@@ -1,4 +1,6 @@
 #include "Game.h"
+
+#include "Camera.h"
 #include "Map.h"
 #include "Player.h"
 

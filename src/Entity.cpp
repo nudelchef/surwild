@@ -1,5 +1,9 @@
 #include "Entity.h"
 
+#include "Game.h"
+#include "Camera.h"
+#include "Map.h"
+
 Entity::Entity()
 {
     src.x = src.y = 0;
@@ -24,6 +28,38 @@ Entity::~Entity()
     delete[] frameOrder;
 }
 
+void Entity::update()
+{
+    if (isMoving)
+    {
+        updateMovement();
+
+        animationTime++;
+        while (animationTime >= animationDuration)
+        {
+            animationTime-=animationDuration;
+
+            atFrame++;
+            if (atFrame >= maxFrames)
+                atFrame = 0;
+            src.y = frameOrder[atFrame] * src.h;
+        }
+    } else {
+        src.y = 0;
+    }
+}
+
+void Entity::render()
+{
+    SDL_Rect render_dest;
+    render_dest.x = dest.x - Game::camera->getX();
+    render_dest.y = dest.y - Game::camera->getY() - 2; // Every entity should be rendered to pixels up
+    render_dest.w = dest.w;
+    render_dest.h = dest.h;
+
+    TextureManager::render(texture, src, render_dest);
+}
+
 void Entity::setTilePosition(int x, int y)
 {
     tilePosition->x = x;
@@ -37,13 +73,13 @@ bool Entity::canMove(Direction direction)
     switch (direction)
     {
     case Direction::UP:
-        return map->canTravel(tilePosition->x, tilePosition->y - 1);
+        return Game::map->canTravel(tilePosition->x, tilePosition->y - 1);
     case Direction::DOWN:
-        return map->canTravel(tilePosition->x, tilePosition->y + 1);
+        return Game::map->canTravel(tilePosition->x, tilePosition->y + 1);
     case Direction::LEFT:
-        return map->canTravel(tilePosition->x - 1, tilePosition->y);
+        return Game::map->canTravel(tilePosition->x - 1, tilePosition->y);
     case Direction::RIGHT:
-        return map->canTravel(tilePosition->x + 1, tilePosition->y);
+        return Game::map->canTravel(tilePosition->x + 1, tilePosition->y);
     default:
         break;
     }
