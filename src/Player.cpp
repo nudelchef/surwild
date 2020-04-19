@@ -1,6 +1,7 @@
 #include "Player.h"
 
 #include "Camera.h"
+#include "TextureManager.h"
 
 Player::Player()
 {

@@ -71,40 +71,38 @@
 
 1587293657 /media/nudelchef/workspace/dev/c/workspace/surwild/include/Camera.h
 
-1587293032 /media/nudelchef/workspace/dev/c/workspace/surwild/include/Game.h
-	<iostream>
+1587294065 /media/nudelchef/workspace/dev/c/workspace/surwild/include/Game.h
 	<SDL/SDL.h>
 	<SDL2/SDL.h>
-	<SDL2/SDL_image.h>
 
-1587293806 /media/nudelchef/workspace/dev/c/workspace/surwild/include/Map.h
-	<fstream>
-	<iostream>
+1587294326 /media/nudelchef/workspace/dev/c/workspace/surwild/include/Map.h
+	<SDL/SDL.h>
+	<SDL2/SDL.h>
 	<map>
-	<string>
-	"TextureManager.h"
 
-1587284713 /media/nudelchef/workspace/dev/c/workspace/surwild/include/StringUtils.h
+1587293969 /media/nudelchef/workspace/dev/c/workspace/surwild/include/StringUtils.h
 	<string>
-	<algorithm>
 
 1587292755 /media/nudelchef/workspace/dev/c/workspace/surwild/include/TextureManager.h
 	"Game.h"
 
-1587293172 source:/media/nudelchef/workspace/dev/c/workspace/surwild/src/Entity.cpp
+1587294370 source:/media/nudelchef/workspace/dev/c/workspace/surwild/src/Entity.cpp
 	"Entity.h"
+	"TextureManager.h"
 	"Game.h"
 	"Camera.h"
 	"Map.h"
 
-1587292711 /media/nudelchef/workspace/dev/c/workspace/surwild/include/Entity.h
-	"TextureManager.h"
+1587294381 /media/nudelchef/workspace/dev/c/workspace/surwild/include/Entity.h
+	<SDL/SDL.h>
+	<SDL2/SDL.h>
 	"Direction.h"
 
 1586708709 /media/nudelchef/workspace/dev/c/workspace/surwild/include/Direction.h
 
-1587293026 source:/media/nudelchef/workspace/dev/c/workspace/surwild/src/Game.cpp
+1587294237 source:/media/nudelchef/workspace/dev/c/workspace/surwild/src/Game.cpp
 	"Game.h"
+	<iostream>
 	"Camera.h"
 	"Map.h"
 	"Player.h"
@@ -115,18 +113,26 @@
 1587286737 source:/media/nudelchef/workspace/dev/c/workspace/surwild/src/main.cpp
 	"Game.h"
 
-1587293775 source:/media/nudelchef/workspace/dev/c/workspace/surwild/src/Map.cpp
+1587294295 source:/media/nudelchef/workspace/dev/c/workspace/surwild/src/Map.cpp
 	"Map.h"
+	<fstream>
+	<iostream>
+	<string>
+	"TextureManager.h"
 	"Camera.h"
 	"StringUtils.h"
 
-1587293038 source:/media/nudelchef/workspace/dev/c/workspace/surwild/src/Player.cpp
+1587294397 source:/media/nudelchef/workspace/dev/c/workspace/surwild/src/Player.cpp
 	"Player.h"
 	"Camera.h"
-
-1587283647 source:/media/nudelchef/workspace/dev/c/workspace/surwild/src/StringUtils.cpp
-	"StringUtils.h"
-
-1587283935 source:/media/nudelchef/workspace/dev/c/workspace/surwild/src/TextureManager.cpp
 	"TextureManager.h"
+
+1587293974 source:/media/nudelchef/workspace/dev/c/workspace/surwild/src/StringUtils.cpp
+	"StringUtils.h"
+	<algorithm>
+
+1587294087 source:/media/nudelchef/workspace/dev/c/workspace/surwild/src/TextureManager.cpp
+	"TextureManager.h"
+	<iostream>
+	<SDL2/SDL_image.h>
 

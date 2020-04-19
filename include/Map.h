@@ -1,12 +1,13 @@
 #ifndef MAP_H_INCLUDED
 #define MAP_H_INCLUDED
 
-#include <fstream>
-#include <iostream>
-#include <map>
-#include <string>
+#ifdef _WIN32
+#include <SDL/SDL.h> /* Windows-specific SDL2 library */
+#else
+#include <SDL2/SDL.h> /* macOS- and GNU/Linux-specific */
+#endif
 
-#include "TextureManager.h"
+#include <map>
 
 class Map
 {

@@ -1,5 +1,6 @@
 #include "Entity.h"
 
+#include "TextureManager.h"
 #include "Game.h"
 #include "Camera.h"
 #include "Map.h"

@@ -1,5 +1,9 @@
 #include "TextureManager.h"
 
+#include <iostream>
+
+#include <SDL2/SDL_image.h>
+
 namespace TextureManager
 {
     SDL_Texture* LoadTexture(const char* filename)

@@ -2,7 +2,6 @@
 #define STRINGUTILS_H
 
 #include <string>
-#include <algorithm>
 
 namespace StringUtils
 {

@@ -1,5 +1,10 @@
 #include "Map.h"
 
+#include <fstream>
+#include <iostream>
+#include <string>
+
+#include "TextureManager.h"
 #include "Camera.h"
 #include "StringUtils.h"
 

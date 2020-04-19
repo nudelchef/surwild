@@ -1,5 +1,7 @@
 #include "Game.h"
 
+#include <iostream>
+
 #include "Camera.h"
 #include "Map.h"
 #include "Player.h"
