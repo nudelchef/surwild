@@ -1,4 +1,10 @@
 #include "Game.h"
+#include "SocketClient.h"
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string.h>
 
 int main( int argc, char* args[] )
 {
@@ -8,7 +14,14 @@ int main( int argc, char* args[] )
     Uint32 frameStart;
     int frameTime;
 
-    Game* game = new Game();
+
+    SocketClient client = SocketClient();
+    if (! client.connect("127.0.0.1", 8888))
+    {
+        return 0;
+    }
+
+    Game* game = new Game(&client);
     game->init("Surwild", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 960, false);
 
     while(game->running())

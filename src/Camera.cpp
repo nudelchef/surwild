@@ -22,13 +22,16 @@ void Camera::update()
     if (keys[SDL_SCANCODE_W])
     {
         y -= camera_speed;
-    } else if (keys[SDL_SCANCODE_S])
+    }
+    else if (keys[SDL_SCANCODE_S])
     {
         y += camera_speed;
-    } else if (keys[SDL_SCANCODE_A])
+    }
+    else if (keys[SDL_SCANCODE_A])
     {
         x -= camera_speed;
-    } else if (keys[SDL_SCANCODE_D])
+    }
+    else if (keys[SDL_SCANCODE_D])
     {
         x += camera_speed;
     }

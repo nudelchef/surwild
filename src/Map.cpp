@@ -53,7 +53,8 @@ void Map::LoadMap(const char *filename)
                     // new option
                     object_name = StringUtils::removeSpaces(line);
 
-                    if (object_name.find(":") != std::string::npos) {
+                    if (object_name.find(":") != std::string::npos)
+                    {
 
                         // object data is inside name // split
 
@@ -64,7 +65,8 @@ void Map::LoadMap(const char *filename)
 
                         std::cout << "<info> [Map][Object] " << object_name << std::endl;
                         std::cout << "<info> [Map][Object-Data] " << object_data << std::endl;
-                    } else
+                    }
+                    else
                     {
                         // reset object data
                         std::cout << "<info> [Map][Object] " << object_name << std::endl;
@@ -72,7 +74,9 @@ void Map::LoadMap(const char *filename)
                     }
 
 
-                } else {
+                }
+                else
+                {
                     // append
                     if (object_data != "")
                     {
@@ -92,7 +96,9 @@ void Map::LoadMap(const char *filename)
             setMapProperty(object_name, object_data);
 
         mapFile.close();
-    } else {
+    }
+    else
+    {
         std::cout << "<erro> [Map] Couldn't read map file" << std::endl;
     }
 }
@@ -128,16 +134,21 @@ void Map::setMapProperty(std::string object_name, std::string object_data)
     if (object_name == "map_name")
     {
         setPropertyMapName(object_data);
-    } else if (object_name == "map_dimension")
+    }
+    else if (object_name == "map_dimension")
     {
         setPropertyMapDimension(object_data);
-    } else if (object_name == "map_atlas")
+    }
+    else if (object_name == "map_atlas")
     {
         setPropertyMapAtlas(object_data);
-    } else if (object_name == "map_data")
+    }
+    else if (object_name == "map_data")
     {
         setPropertyMapData(object_data);
-    } else {
+    }
+    else
+    {
         std::cout << "<warn> [Map] Loading Map - Unknown map Option: " << object_name << std::endl;
     }
 }
@@ -206,7 +217,8 @@ void Map::setPropertyMapData(std::string object_data)
         token = object_data.substr(0, pos);
 
         if (token.find(":") != std::string::npos)
-        { // runlength encoding
+        {
+            // runlength encoding
 
             splitterIndex = token.find(":");
 
@@ -218,7 +230,8 @@ void Map::setPropertyMapData(std::string object_data)
                 map[ind++] = tileId;
             }
 
-        }else
+        }
+        else
         {
             map[ind++] = std::stoi(token);
         }
@@ -229,7 +242,8 @@ void Map::setPropertyMapData(std::string object_data)
     token = object_data;
 
     if (token.find(":") != std::string::npos)
-    { // runlength encoding
+    {
+        // runlength encoding
 
         splitterIndex = token.find(":");
 
@@ -241,7 +255,8 @@ void Map::setPropertyMapData(std::string object_data)
             map[ind++] = tileId;
         }
 
-    }else
+    }
+    else
     {
         map[ind++] = std::stoi(token);
     }

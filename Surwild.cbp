@@ -6,6 +6,7 @@
 		<Option platforms="Windows;Unix;" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="net/;util/;map/;entity/" />
 		<Build>
 			<Target title="Debug">
 				<Option platforms="Windows;Unix;" />
@@ -18,6 +19,9 @@
 					<Add option="-g" />
 					<Add directory="include" />
 				</Compiler>
+				<Linker>
+					<Add option="-pthread" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option platforms="Windows;Unix;" />
@@ -31,6 +35,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add option="-pthread" />
 				</Linker>
 			</Target>
 		</Build>
@@ -43,25 +48,53 @@
 			<Add option="-lSDL2" />
 			<Add option="-lSDL2_image" />
 		</Linker>
-		<Unit filename="assets/dirt.png" />
-		<Unit filename="assets/grass.png" />
-		<Unit filename="assets/naey_spritesheet.png" />
-		<Unit filename="assets/water.png" />
-		<Unit filename="include/Camera.h" />
-		<Unit filename="include/Direction.h" />
-		<Unit filename="include/Entity.h" />
+		<Unit filename="include/Camera.h">
+			<Option virtualFolder="util/" />
+		</Unit>
+		<Unit filename="include/Direction.h">
+			<Option virtualFolder="util/" />
+		</Unit>
+		<Unit filename="include/Entity.h">
+			<Option virtualFolder="entity/" />
+		</Unit>
 		<Unit filename="include/Game.h" />
-		<Unit filename="include/Map.h" />
-		<Unit filename="include/Player.h" />
-		<Unit filename="include/StringUtils.h" />
-		<Unit filename="include/TextureManager.h" />
-		<Unit filename="src/Camera.cpp" />
-		<Unit filename="src/Entity.cpp" />
+		<Unit filename="include/Map.h">
+			<Option virtualFolder="map/" />
+		</Unit>
+		<Unit filename="include/Player.h">
+			<Option virtualFolder="entity/" />
+		</Unit>
+		<Unit filename="include/SocketClient.h">
+			<Option virtualFolder="net/" />
+		</Unit>
+		<Unit filename="include/StringUtils.h">
+			<Option virtualFolder="util/" />
+		</Unit>
+		<Unit filename="include/TextureManager.h">
+			<Option virtualFolder="util/" />
+		</Unit>
+		<Unit filename="src/Camera.cpp">
+			<Option virtualFolder="util/" />
+		</Unit>
+		<Unit filename="src/Entity.cpp">
+			<Option virtualFolder="entity/" />
+		</Unit>
 		<Unit filename="src/Game.cpp" />
-		<Unit filename="src/Map.cpp" />
-		<Unit filename="src/Player.cpp" />
-		<Unit filename="src/StringUtils.cpp" />
-		<Unit filename="src/TextureManager.cpp" />
+		<Unit filename="src/Map.cpp">
+			<Option virtualFolder="map/" />
+		</Unit>
+		<Unit filename="src/Player.cpp">
+			<Option virtualFolder="entity/" />
+		</Unit>
+		<Unit filename="src/SocketClient.cpp">
+			<Option virtualFolder="net/" />
+		</Unit>
+		<Unit filename="src/StringUtils.cpp">
+			<Option virtualFolder="util/" />
+		</Unit>
+		<Unit filename="src/TextureManager.cpp">
+			<Option virtualFolder="util/" />
+		</Unit>
 		<Unit filename="src/main.cpp" />
 		<Extensions />
 	</Project>

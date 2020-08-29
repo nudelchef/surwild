@@ -5,15 +5,15 @@
 
 class Player: public Entity
 {
-    public:
-        Player();
-        virtual ~Player();
+public:
+    Player();
+    virtual ~Player();
 
-        void update();
+    void update();
 
-    protected:
+protected:
 
-    private:
+private:
 };
 
 #endif // PLAYER_H

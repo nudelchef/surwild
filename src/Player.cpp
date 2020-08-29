@@ -22,13 +22,16 @@ void Player::update()
     if (keys[SDL_SCANCODE_UP])
     {
         move(Direction::UP);
-    } else if (keys[SDL_SCANCODE_DOWN])
+    }
+    else if (keys[SDL_SCANCODE_DOWN])
     {
         move(Direction::DOWN);
-    } else if (keys[SDL_SCANCODE_LEFT])
+    }
+    else if (keys[SDL_SCANCODE_LEFT])
     {
         move(Direction::LEFT);
-    } else if (keys[SDL_SCANCODE_RIGHT])
+    }
+    else if (keys[SDL_SCANCODE_RIGHT])
     {
         move(Direction::RIGHT);
     }

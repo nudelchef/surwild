@@ -18,8 +18,14 @@ public:
     void LoadMap(const char *filename);
     void renderMap();
 
-    int getTotalMapWidth() { return mapWidth * dest.w; }
-    int getTotalMapHeight() { return mapHeight * dest.h; }
+    int getTotalMapWidth()
+    {
+        return mapWidth * dest.w;
+    }
+    int getTotalMapHeight()
+    {
+        return mapHeight * dest.h;
+    }
 
     bool canTravel(int tileX, int tileY);
 

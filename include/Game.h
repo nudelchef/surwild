@@ -10,34 +10,39 @@
 class Camera;
 class Map;
 class Player;
+class SocketClient;
 
 extern const Uint8* keys;
 
 class Game
 {
-    public:
-        Game();
-        virtual ~Game();
+public:
+    Game(SocketClient* client_);
+    virtual ~Game();
 
-        void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
-        void handleEvents();
-        void update();
-        void render();
-        void clean();
+    void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
+    void handleEvents();
+    void update();
+    void render();
+    void clean();
 
-        bool running() { return isRunning; }
+    bool running()
+    {
+        return isRunning;
+    }
 
-        static SDL_Renderer *renderer;
+    static SDL_Renderer *renderer;
 
-        static Camera* camera;
-        static Map* map;
-        static Player* player;
+    static Camera* camera;
+    static Map* map;
+    static Player* player;
+    static SocketClient* client;
 
-    protected:
+protected:
 
-    private:
-        bool isRunning;
-        SDL_Window *window;
+private:
+    bool isRunning;
+    SDL_Window *window;
 };
 
 

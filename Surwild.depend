@@ -136,52 +136,59 @@
 	<iostream>
 	<SDL2/SDL_image.h>
 
-1587293666 source:/workspace/dev/c/workspace/surwild/src/Camera.cpp
+1590835998 source:/workspace/dev/c/workspace/surwild/src/Camera.cpp
 	"Camera.h"
 	"Game.h"
 
-1587293657 /workspace/dev/c/workspace/surwild/include/Camera.h
+1590835998 /workspace/dev/c/workspace/surwild/include/Camera.h
 
-1587294856 /workspace/dev/c/workspace/surwild/include/Game.h
+1598710193 /workspace/dev/c/workspace/surwild/include/Game.h
 	<SDL/SDL.h>
 	<SDL2/SDL.h>
 
-1587294370 source:/workspace/dev/c/workspace/surwild/src/Entity.cpp
+1598711569 source:/workspace/dev/c/workspace/surwild/src/Entity.cpp
 	"Entity.h"
 	"TextureManager.h"
 	"Game.h"
 	"Camera.h"
 	"Map.h"
+	"SocketClient.h"
 
-1587294381 /workspace/dev/c/workspace/surwild/include/Entity.h
+1590835998 /workspace/dev/c/workspace/surwild/include/Entity.h
 	<SDL/SDL.h>
 	<SDL2/SDL.h>
 	"Direction.h"
 
-1586708709 /workspace/dev/c/workspace/surwild/include/Direction.h
+1590835998 /workspace/dev/c/workspace/surwild/include/Direction.h
 
-1587292755 /workspace/dev/c/workspace/surwild/include/TextureManager.h
+1590835998 /workspace/dev/c/workspace/surwild/include/TextureManager.h
 	"Game.h"
 
-1587294326 /workspace/dev/c/workspace/surwild/include/Map.h
+1590835998 /workspace/dev/c/workspace/surwild/include/Map.h
 	<SDL/SDL.h>
 	<SDL2/SDL.h>
 	<map>
 
-1587294869 source:/workspace/dev/c/workspace/surwild/src/Game.cpp
+1598710553 source:/workspace/dev/c/workspace/surwild/src/Game.cpp
 	"Game.h"
 	<iostream>
+	<SDL2/SDL_image.h>
 	"Camera.h"
 	"Map.h"
 	"Player.h"
 
-1587292217 /workspace/dev/c/workspace/surwild/include/Player.h
+1590835998 /workspace/dev/c/workspace/surwild/include/Player.h
 	"Entity.h"
 
-1587286737 source:/workspace/dev/c/workspace/surwild/src/main.cpp
+1598710642 source:/workspace/dev/c/workspace/surwild/src/main.cpp
 	"Game.h"
+	"SocketClient.h"
+	<iostream>
+	<vector>
+	<algorithm>
+	<string.h>
 
-1587294295 source:/workspace/dev/c/workspace/surwild/src/Map.cpp
+1590835998 source:/workspace/dev/c/workspace/surwild/src/Map.cpp
 	"Map.h"
 	<fstream>
 	<iostream>
@@ -190,20 +197,34 @@
 	"Camera.h"
 	"StringUtils.h"
 
-1587293969 /workspace/dev/c/workspace/surwild/include/StringUtils.h
+1590835998 /workspace/dev/c/workspace/surwild/include/StringUtils.h
 	<string>
 
-1587307777 source:/workspace/dev/c/workspace/surwild/src/Player.cpp
+1590835998 source:/workspace/dev/c/workspace/surwild/src/Player.cpp
 	"Player.h"
 	"Camera.h"
 	"TextureManager.h"
 
-1587293974 source:/workspace/dev/c/workspace/surwild/src/StringUtils.cpp
+1590835998 source:/workspace/dev/c/workspace/surwild/src/StringUtils.cpp
 	"StringUtils.h"
 	<algorithm>
 
-1587294087 source:/workspace/dev/c/workspace/surwild/src/TextureManager.cpp
+1590835998 source:/workspace/dev/c/workspace/surwild/src/TextureManager.cpp
 	"TextureManager.h"
 	<iostream>
 	<SDL2/SDL_image.h>
+
+1594812694 /workspace/dev/c/workspace/surwild/include/SocketClient.h
+
+1598711839 source:/workspace/dev/c/workspace/surwild/src/SocketClient.cpp
+	"SocketClient.h"
+	<iostream>
+	<sys/socket.h>
+	<netinet/in.h>
+	<string.h>
+	<arpa/inet.h>
+	<stdlib.h>
+	<fcntl.h>
+	<unistd.h>
+	<pthread.h>
 

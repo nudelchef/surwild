@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include <SDL2/SDL_image.h>
+
 #include "Camera.h"
 #include "Map.h"
 #include "Player.h"
@@ -12,11 +14,13 @@ SDL_Renderer* Game::renderer = nullptr;
 Camera* Game::camera = nullptr;
 Map* Game::map = nullptr;
 Player* Game::player = nullptr;
+SocketClient* Game::client = nullptr;
 
 
 
-Game::Game()
+Game::Game(SocketClient *client_)
 {
+    Game::client = client_;
 }
 
 Game::~Game()
@@ -45,6 +49,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
             std::cout << "SDL Window created." << std::endl;
         }
 
+        /*<icon>*/
+        // The icon is attached to the window pointer
+        SDL_SetWindowIcon(window, IMG_Load("assets/logo.png"));
+        /*</icon>*/
+
         renderer = SDL_CreateRenderer(window, -1, 0);
         if (renderer)
         {
@@ -53,7 +62,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         }
 
         isRunning = true;
-    } else {
+    }
+    else
+    {
         isRunning = false;
     }
 
