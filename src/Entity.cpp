@@ -96,23 +96,7 @@ bool Entity::canMove(Direction direction)
 
 void Entity::look(Direction direction)
 {
-    switch(direction)
-    {
-    case Direction::UP:
-        src.x = 64;
-        break;
-    case Direction::DOWN:
-        src.x = 0;
-        break;
-    case Direction::LEFT:
-        src.x = 32;
-        break;
-    case Direction::RIGHT:
-        src.x = 96;
-        break;
-    default:
-        break;
-    }
+    src.x = direction * 32;
 }
 
 void Entity::move(Direction direction)

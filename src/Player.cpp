@@ -17,7 +17,7 @@ Player::~Player()
 
 }
 
-void Player::setData(PACKET_PLAYER_DATA data)
+void Player::setData(PACKET::REGISTER_PLAYER data)
 {
     entityId = data.entityId;
     playerId = data.playerId;

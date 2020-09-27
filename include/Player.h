@@ -12,7 +12,7 @@ public:
 
     unsigned int playerId;
 
-    void setData(PACKET_PLAYER_DATA data);
+    void setData(PACKET::REGISTER_PLAYER data);
     void update();
 
 protected:

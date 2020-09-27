@@ -118,7 +118,7 @@ void Game::handleNetcode(const std::string& message)
 
             break;
         case 4: // PLAYERDATA
-            player->setData(PACKET_PLAYER_DATA(message));
+            player->setData(PACKET::REGISTER_PLAYER(message));
             break;
         default:
             std::cout << "unknown packet (" << packetId << ") received?" << std::endl;
