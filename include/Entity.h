@@ -7,6 +7,8 @@
 #include <SDL2/SDL.h> /* macOS- and GNU/Linux-specific */
 #endif
 
+#include <string>
+
 #include "Direction.h"
 
 class Entity
@@ -14,6 +16,14 @@ class Entity
 public:
     Entity();
     virtual ~Entity();
+
+    unsigned int entityId;
+
+    SDL_Rect src;
+    SDL_Rect dest;
+    SDL_Point* tilePosition;
+    std::string textureString;
+    Direction movementDirection;
 
     virtual void update();
     virtual void render();
@@ -71,13 +81,8 @@ private:
     int maxFrames;
     int animationTime;
 
-    Direction movementDirection;
     bool isMoving;
-    SDL_Point* tilePosition;
     int distanceLeft;
-
-    SDL_Rect src;
-    SDL_Rect dest;
     SDL_Texture* texture;
 
     void updateMovement();

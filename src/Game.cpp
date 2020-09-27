@@ -1,6 +1,8 @@
 #include "Game.h"
 
 #include <iostream>
+#include <sstream>
+#include <arpa/inet.h> // htons ntohs
 
 #include <SDL2/SDL_image.h>
 
@@ -98,7 +100,30 @@ void Game::handleEvents()
 
 void Game::handleNetcode(const std::string& message)
 {
-    std::cout << "msg: [" << message << "] " << std::endl;
+    std::stringstream m_stream(message);
+    std::string line;
+    std::getline(m_stream, line, '\037');
+
+    uint16_t packetId = ntohs((uint16_t) std::stoul(line));
+
+    switch(packetId) {
+        case 0: // PACKET
+            break;
+        case 1: // DISCONNECT
+            //client->disconnect();
+            break;
+        case 2: // LOGIN -- server can't login lmao
+            break;
+        case 3: // UNREGISTER PLAYER
+
+            break;
+        case 4: // PLAYERDATA
+            player->setData(PACKET_PLAYER_DATA(message));
+            break;
+        default:
+            std::cout << "unknown packet (" << packetId << ") received?" << std::endl;
+            break;
+    }
 }
 
 void Game::update()

@@ -1,13 +1,14 @@
 #include "Entity.h"
 
+#include <sstream>
+#include <string>
+
 #include "TextureManager.h"
 #include "Game.h"
 #include "Camera.h"
 #include "Map.h"
 #include "SocketClient.h"
-
-#include <sstream>
-#include <string>
+#include "PacketManager.h"
 
 Entity::Entity()
 {
@@ -181,7 +182,7 @@ void Entity::updateMovement()
 
 
         std::stringstream sstream;
-        sstream << "[X: " << tilePosition->x << ", Y: " << tilePosition->y << "]";
+        sstream << "0\037[X: " << tilePosition->x << ", Y: " << tilePosition->y << "]";
 
         Game::client->send(sstream.str().c_str());
 

@@ -17,6 +17,16 @@ Player::~Player()
 
 }
 
+void Player::setData(PACKET_PLAYER_DATA data)
+{
+    entityId = data.entityId;
+    playerId = data.playerId;
+
+    textureString = data.textureString;
+    look(data.movementDirection);
+    setTilePosition(data.tilePositionX, data.tilePositionY);
+}
+
 void Player::update()
 {
     if (keys[SDL_SCANCODE_UP])
