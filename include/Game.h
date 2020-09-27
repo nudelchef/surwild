@@ -7,6 +7,8 @@
 #include <SDL2/SDL.h> /* macOS- and GNU/Linux-specific */
 #endif
 
+#include <string>
+
 class Camera;
 class Map;
 class Player;
@@ -43,6 +45,8 @@ protected:
 private:
     bool isRunning;
     SDL_Window *window;
+
+    void handleNetcode(const std::string& message);
 };
 
 

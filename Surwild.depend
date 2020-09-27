@@ -142,17 +142,20 @@
 
 1590835998 /workspace/dev/c/workspace/surwild/include/Camera.h
 
-1598710193 /workspace/dev/c/workspace/surwild/include/Game.h
+1599990238 /workspace/dev/c/workspace/surwild/include/Game.h
 	<SDL/SDL.h>
 	<SDL2/SDL.h>
+	<string>
 
-1598711569 source:/workspace/dev/c/workspace/surwild/src/Entity.cpp
+1598787796 source:/workspace/dev/c/workspace/surwild/src/Entity.cpp
 	"Entity.h"
 	"TextureManager.h"
 	"Game.h"
 	"Camera.h"
 	"Map.h"
 	"SocketClient.h"
+	<sstream>
+	<string>
 
 1590835998 /workspace/dev/c/workspace/surwild/include/Entity.h
 	<SDL/SDL.h>
@@ -169,18 +172,19 @@
 	<SDL2/SDL.h>
 	<map>
 
-1598710553 source:/workspace/dev/c/workspace/surwild/src/Game.cpp
+1599990367 source:/workspace/dev/c/workspace/surwild/src/Game.cpp
 	"Game.h"
 	<iostream>
 	<SDL2/SDL_image.h>
 	"Camera.h"
 	"Map.h"
 	"Player.h"
+	"SocketClient.h"
 
 1590835998 /workspace/dev/c/workspace/surwild/include/Player.h
 	"Entity.h"
 
-1598710642 source:/workspace/dev/c/workspace/surwild/src/main.cpp
+1598778285 source:/workspace/dev/c/workspace/surwild/src/main.cpp
 	"Game.h"
 	"SocketClient.h"
 	<iostream>
@@ -214,10 +218,14 @@
 	<iostream>
 	<SDL2/SDL_image.h>
 
-1594812694 /workspace/dev/c/workspace/surwild/include/SocketClient.h
+1599991576 /workspace/dev/c/workspace/surwild/include/SocketClient.h
+	<pthread.h>
+	<string>
+	<vector>
 
-1598711839 source:/workspace/dev/c/workspace/surwild/src/SocketClient.cpp
+1599995778 source:/workspace/dev/c/workspace/surwild/src/SocketClient.cpp
 	"SocketClient.h"
+	"Game.h"
 	<iostream>
 	<sys/socket.h>
 	<netinet/in.h>
@@ -227,4 +235,5 @@
 	<fcntl.h>
 	<unistd.h>
 	<pthread.h>
+	<cstring>
 

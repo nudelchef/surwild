@@ -7,6 +7,7 @@
 #include "Camera.h"
 #include "Map.h"
 #include "Player.h"
+#include "SocketClient.h"
 
 SDL_Renderer* Game::renderer = nullptr;
 
@@ -95,8 +96,22 @@ void Game::handleEvents()
     }
 }
 
+void Game::handleNetcode(const std::string& message)
+{
+    std::cout << "msg: [" << message << "] " << std::endl;
+}
+
 void Game::update()
 {
+    // receive network messages
+    std::string message = client->pthread_pop();
+    while(!message.empty())
+    {
+        handleNetcode(message);
+
+        message = client->pthread_pop();
+    }
+
     camera->update();
     player->update();
 

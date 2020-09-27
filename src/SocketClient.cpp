@@ -1,5 +1,7 @@
 #include "SocketClient.h"
 
+#include "Game.h"
+
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -10,6 +12,8 @@
 #include <unistd.h> // for close
 #include <pthread.h>
 
+#include <cstring>
+
 #define COLOR_MAGENTA "\e[95m"
 #define COLOR_CLEAR "\e[39m"
 
@@ -17,64 +21,118 @@ void* SocketClient::listen(void *arg)
 {
     SocketClient *sock = (SocketClient *) arg;
 
-    char buffer[1024 + 1];
+    sock->listenerLock = PTHREAD_MUTEX_INITIALIZER;
 
-    while(recv(sock->clientSocket, buffer, 1024 + 1, 0) > 0)
+    constexpr size_t CHUNK_LENGTH = 1024;
+    char buffer[CHUNK_LENGTH];
+
+    unsigned long bytesTotal;
+    unsigned long bytesToRead;
+    unsigned long bytesRead;
+    unsigned long bytesRemaining;
+
+    std::string message;
+
+    while(true)
     {
-        buffer[1024] = '\0';
 
-        std::cout << "Received: [" << buffer << "]" << std::endl;
-        memset(buffer, 0, sizeof(buffer));
+        // READ MESSAGE LENGTH
+        if (recv(sock->clientSocket, buffer, sizeof(unsigned long), 0) != sizeof(unsigned long))
+        {
+            break;
+        }
+        memcpy(&bytesTotal, &buffer[0], sizeof(unsigned long));
+
+        bytesTotal = ntohl((unsigned long) bytesTotal);
+        bytesRemaining = bytesTotal;
+
+        // READ MESSAGE
+        message = "";
+        do
+        {
+            bytesToRead = std::min(CHUNK_LENGTH, bytesRemaining);
+
+            bytesRead = recv(sock->clientSocket, &buffer, bytesToRead, 0);
+
+            if (bytesRead < 0) break;
+            else bytesRemaining -= bytesRead;
+
+            message.append(&buffer[0], bytesRead);
+
+        } while (bytesRemaining > 0);
+
+        int rc = pthread_mutex_lock(&sock->listenerLock);
+        if (rc) {
+            perror("pthread_mutex_lock");
+            pthread_exit(NULL);
+        }
+        // process whole message
+
+        sock->messages_received.push_back(message);
+
+        rc = pthread_mutex_unlock(&sock->listenerLock);
+        if (rc) {
+            perror("pthread_mutex_unlock");
+            pthread_exit(NULL);
+        }
     }
-    //Print the received message
-    std::cout << "Receive failed or closed" << std::endl;
+
+    std::cout << ">>>Server Closed<<<" << std::endl;
     close(sock->clientSocket);
 
-    return 0;
-    //pthread_exit(NULL);
+    pthread_exit(NULL);
 }
 
-void SocketClient::send(const char* message)
+std::string SocketClient::pthread_pop()
 {
-    std::cout << "Sending: " << message << std::endl;
+    std::string message;
 
-    unsigned long buffersize = 8;
-    char buffer[buffersize + 1];
-    buffer[buffersize + 1] = '\0';
-
-
-    unsigned int chunks = strlen(message) / buffersize;
-    unsigned long lastBit = strlen(message) % buffersize;
-
-    unsigned long writeTil = buffersize;
-
-    uint64_t message_length = strlen(message);
-    memcpy(&buffer, &message_length, sizeof(uint64_t));
-    if( ::send(clientSocket , buffer , sizeof(uint64_t) , 0) < 0)
-    {
-        std::cout << "Send failed" << std::endl;
+    int rc = pthread_mutex_lock(&listenerLock);
+    if (rc) { /* an error has occurred */
+        perror("pthread_mutex_lock");
+        pthread_exit(NULL);
     }
 
-    for (unsigned int i = 0; i <= chunks; i++)
-    {
-        // copy message into buffer
-        memcpy(&buffer[0], &message[0] + i * buffersize, buffersize);
-        if (i == chunks) {
-            if (lastBit < buffersize)
-            {
-                buffer[lastBit] = '\0';
-                writeTil = lastBit + 1;
-            }else{
-                writeTil = buffersize + 1;
-            }
-        }
-
-        std::cout << std::endl;
-        if( ::send(clientSocket , buffer , writeTil , 0) < 0)
-        {
-            std::cout << "Send failed" << std::endl;
-        }
+    if (!messages_received.empty()) {
+        message = messages_received.back();
+        messages_received.pop_back();
     }
+
+    rc = pthread_mutex_unlock(&listenerLock);
+    if (rc) {
+        perror("pthread_mutex_unlock");
+        pthread_exit(NULL);
+    }
+
+    return message;
+}
+
+void SocketClient::send(const std::string& message)
+{
+    constexpr size_t CHUNK_LENGTH = 1024;
+    const size_t bytesTotal = message.length();
+    size_t bytesRemaining = bytesTotal;
+    size_t bytesSent = 0;
+    size_t bytesToSend = 0;
+
+    std::cout << "sending: [" << message << "] (" << bytesTotal << ") bytes." << std::endl;
+
+
+    unsigned long lengthValue = htonl((unsigned long) bytesTotal);
+    if (::send(clientSocket, (const char*)&lengthValue, sizeof(lengthValue), 0) < 0) {
+        return;
+    }
+
+    do
+    {
+        bytesToSend = std::min(CHUNK_LENGTH, bytesRemaining);
+
+        bytesSent = ::send(clientSocket, message.c_str() + (bytesTotal - bytesRemaining), bytesToSend, 0);
+
+        if (bytesSent < 0) return;
+        else bytesRemaining -= bytesSent;
+
+    } while (bytesRemaining > 0);
 }
 
 bool SocketClient::connect(const char *ipAddr_, long port_)
