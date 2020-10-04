@@ -23,7 +23,7 @@ Entity::Entity()
     tilePosition = new SDL_Point();
 
     atFrame = 0;
-    frameOrder = new int[1];
+    frameOrder = nullptr;
     animationTime = 0;
 
     setTilePosition(0, 0);
@@ -68,7 +68,7 @@ void Entity::render()
     TextureManager::render(texture, src, render_dest);
 }
 
-void Entity::setTilePosition(int x, int y)
+void Entity::setTilePosition(uint16_t x, uint16_t y)
 {
     tilePosition->x = x;
     tilePosition->y = y;

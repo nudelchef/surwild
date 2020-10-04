@@ -22,7 +22,7 @@ public:
     Game(SocketClient* client_);
     virtual ~Game();
 
-    void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
+    void init(const char* title, uint32_t xpos, uint32_t ypos, uint32_t width, uint32_t height, bool fullscreen);
     void handleEvents();
     void update();
     void render();

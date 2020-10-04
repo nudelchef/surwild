@@ -31,13 +31,13 @@ Game::~Game()
 }
 
 
-const Uint8* keys = SDL_GetKeyboardState(NULL);
+const uint8_t* keys = SDL_GetKeyboardState(NULL);
 
 
 
-void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
+void Game::init(const char* title, uint32_t xpos, uint32_t ypos, uint32_t width, uint32_t height, bool fullscreen)
 {
-    int flags = 0;
+    uint32_t flags = 0;
 
     if (fullscreen)
         flags = SDL_WINDOW_FULLSCREEN;
@@ -140,7 +140,7 @@ void Game::update()
     camera->update();
     player->update();
 
-    camera->forceBorder(0, 0, map->getTotalMapWidth(), map->getTotalMapHeight());
+    camera->clamp(0, 0, map->getTotalMapWidth(), map->getTotalMapHeight());
 }
 
 void Game::render()

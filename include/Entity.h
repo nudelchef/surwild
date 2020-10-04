@@ -17,7 +17,7 @@ public:
     Entity();
     virtual ~Entity();
 
-    unsigned int entityId;
+    uint32_t entityId;
 
     SDL_Rect src;
     SDL_Rect dest;
@@ -28,22 +28,22 @@ public:
     virtual void update();
     virtual void render();
 
-    int getX()
+    uint16_t getX()
     {
         return dest.x;
     }
 
-    int getY()
+    uint16_t getY()
     {
         return dest.y;
     }
 
-    int getCenterX()
+    uint16_t getCenterX()
     {
         return dest.x + (dest.w >> 1);
     }
 
-    int getCenterY()
+    uint16_t getCenterY()
     {
         return dest.y + (dest.h >> 1);
     }
@@ -53,7 +53,7 @@ public:
         texture = texture_;
     }
 
-    void setFrameOrder(int *frameOrder_, int size)
+    void setFrameOrder(uint8_t *frameOrder_, uint8_t size)
     {
         for (int i = 0 ; i < size ; i++)
         {
@@ -62,7 +62,7 @@ public:
         maxFrames = size;
     }
 
-    void setTilePosition(int x, int y);
+    void setTilePosition(uint16_t x, uint16_t y);
 
     void move(Direction direction);
 
@@ -76,13 +76,13 @@ private:
     const int movementSpeed = 2;
 
     const int animationDuration = 8;
-    int atFrame;
-    int* frameOrder;
-    int maxFrames;
-    int animationTime;
+    uint8_t atFrame;
+    uint8_t* frameOrder;
+    uint8_t maxFrames;
+    uint8_t animationTime;
 
     bool isMoving;
-    int distanceLeft;
+    int16_t distanceLeft;
     SDL_Texture* texture;
 
     void updateMovement();

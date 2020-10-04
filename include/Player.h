@@ -10,7 +10,7 @@ public:
     Player();
     virtual ~Player();
 
-    unsigned int playerId;
+    uint32_t playerId;
 
     void setData(PACKET::REGISTER_PLAYER data);
     void update();

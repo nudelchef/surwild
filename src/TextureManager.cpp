@@ -6,11 +6,11 @@
 
 namespace TextureManager
 {
-SDL_Texture* LoadTexture(const char* filename)
+SDL_Texture* LoadTexture(const std::string& filename)
 {
     std::cout << "<info> [TextureManager] Loading file: " << filename << std::endl;
 
-    SDL_Surface* tempSurface = IMG_Load(filename);
+    SDL_Surface* tempSurface = IMG_Load(filename.c_str());
     SDL_Texture* tex = SDL_CreateTextureFromSurface(Game::renderer, tempSurface);
     SDL_FreeSurface(tempSurface);
 

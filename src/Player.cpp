@@ -7,7 +7,7 @@ Player::Player()
 {
     setTexture(TextureManager::LoadTexture("assets/naey_spritesheet.png"));
 
-    int frameOrder_[4] = {0, 2, 0, 3};
+    uint8_t frameOrder_[4] = {0, 2, 0, 3};
 
     setFrameOrder(frameOrder_, sizeof(frameOrder_) / sizeof(frameOrder_[0]));
 }

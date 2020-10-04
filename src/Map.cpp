@@ -29,7 +29,7 @@ Map::~Map()
     delete[] map;
 }
 
-void Map::LoadMap(const char *filename)
+void Map::LoadMap(const std::string& filename)
 {
     std::string line;
     std::ifstream mapFile(filename);
@@ -40,6 +40,8 @@ void Map::LoadMap(const char *filename)
 
     if (mapFile.is_open())
     {
+        uint64_t splitterIndex;
+
         while( std::getline(mapFile, line) )
         {
             if (StringUtils::removeSpaces(line) != "")
@@ -58,7 +60,7 @@ void Map::LoadMap(const char *filename)
 
                         // object data is inside name // split
 
-                        int splitterIndex = object_name.find(":");
+                        splitterIndex = object_name.find(":");
 
                         object_data = object_name.substr(splitterIndex+1);
                         object_name = object_name.substr(0, splitterIndex);
@@ -105,7 +107,7 @@ void Map::LoadMap(const char *filename)
 
 void Map::renderMap()
 {
-    int type = 0;
+    uint64_t type = 0;
 
     for (int y = 0; y < mapHeight; y++)
     {
@@ -121,7 +123,7 @@ void Map::renderMap()
     }
 }
 
-bool Map::canTravel(int tileX, int tileY)
+bool Map::canTravel(uint16_t tileX, uint16_t tileY)
 {
     if (tileX < 0 || tileY < 0 || tileX >= mapWidth || tileY >= mapHeight)
         return false;
@@ -129,7 +131,7 @@ bool Map::canTravel(int tileX, int tileY)
     return true;
 }
 
-void Map::setMapProperty(std::string object_name, std::string object_data)
+void Map::setMapProperty(std::string& object_name, std::string& object_data)
 {
     if (object_name == "map_name")
     {
@@ -153,34 +155,35 @@ void Map::setMapProperty(std::string object_name, std::string object_data)
     }
 }
 
-void Map::setPropertyMapName(std::string object_data)
+void Map::setPropertyMapName(std::string& object_data)
 {
     mapName = object_data;
 }
 
-void Map::setPropertyMapDimension(std::string object_data)
+void Map::setPropertyMapDimension(std::string& object_data)
 {
-    int splitterIndex = object_data.find(",");
+    uint64_t splitterIndex = object_data.find(",");
 
-    mapWidth = std::stoi(object_data.substr(0, splitterIndex));
-    mapHeight = std::stoi(object_data.substr(splitterIndex+1));
+    mapWidth  = std::stoi(object_data.substr(0, splitterIndex));
+    mapHeight = std::stoi(object_data.substr(splitterIndex + 1));
 }
 
-void Map::setPropertyMapAtlas(std::string object_data)
+void Map::setPropertyMapAtlas(std::string& object_data)
 {
     std::string delimiter = ",";
 
     size_t pos = 0;
     std::string token;
-    int splitterIndex;
+    uint64_t splitterIndex;
 
     std::string filename;
+
     while ((pos = object_data.find(delimiter)) != std::string::npos)
     {
         token = object_data.substr(0, pos);
 
         splitterIndex = token.find(":");
-        filename = "assets/";
+        filename  = "assets/";
         filename += token.substr(splitterIndex + 1);
         filename += ".png";
 
@@ -192,25 +195,28 @@ void Map::setPropertyMapAtlas(std::string object_data)
     token = object_data;
 
     splitterIndex = token.find(":");
-    filename = "assets/";
+    filename  = "assets/";
     filename += token.substr(splitterIndex + 1);
     filename += ".png";
 
     map_atlas[std::stoi(token.substr(0, splitterIndex))] = TextureManager::LoadTexture(filename.c_str());
 }
 
-void Map::setPropertyMapData(std::string object_data)
+void Map::setPropertyMapData(std::string& object_data)
 {
-    map = new int[mapWidth * mapHeight];
+    map = new uint16_t[mapWidth * mapHeight];
 
     std::cout << "<info> [Map] size " << mapWidth << ", " << mapHeight << std::endl;
 
-    int ind = 0;
+    uint32_t mapIndex = 0;
 
     std::string delimiter = ",";
     size_t pos = 0;
     std::string token;
-    int splitterIndex;
+    uint64_t splitterIndex;
+
+    uint32_t tileCount;
+    uint32_t tileId;
 
     while ((pos = object_data.find(delimiter)) != std::string::npos)
     {
@@ -219,21 +225,20 @@ void Map::setPropertyMapData(std::string object_data)
         if (token.find(":") != std::string::npos)
         {
             // runlength encoding
-
             splitterIndex = token.find(":");
 
-            int tileCount = std::stoi(token.substr(0, splitterIndex));
-            int tileId = std::stoi(token.substr(splitterIndex + 1));
+            tileCount = std::stoi(token.substr(0, splitterIndex));
+            tileId = std::stoi(token.substr(splitterIndex + 1));
 
-            for (int i = 0 ; i < tileCount ; i++)
+            for (uint32_t i = 0 ; i < tileCount ; i++)
             {
-                map[ind++] = tileId;
+                map[mapIndex++] = tileId;
             }
 
         }
         else
         {
-            map[ind++] = std::stoi(token);
+            map[mapIndex++] = std::stoi(token);
         }
 
         object_data.erase(0, pos + delimiter.length());
@@ -247,19 +252,19 @@ void Map::setPropertyMapData(std::string object_data)
 
         splitterIndex = token.find(":");
 
-        int tileCount = std::stoi(token.substr(0, splitterIndex));
-        int tileId = std::stoi(token.substr(splitterIndex + 1));
+        tileCount = std::stoi(token.substr(0, splitterIndex));
+        tileId = std::stoi(token.substr(splitterIndex + 1));
 
-        for (int i = 0 ; i < tileCount ; i++)
+        for (uint32_t i = 0 ; i < tileCount ; i++)
         {
-            map[ind++] = tileId;
+            map[mapIndex++] = tileId;
         }
 
     }
     else
     {
-        map[ind++] = std::stoi(token);
+        map[mapIndex++] = std::stoi(token);
     }
 
-    std::cout << "<info> [Map] index " << (ind) << " tile " << token << std::endl;
+    std::cout << "<info> [Map] index " << (mapIndex) << " tile " << token << std::endl;
 }

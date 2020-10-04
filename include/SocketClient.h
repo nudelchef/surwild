@@ -13,7 +13,7 @@ class SocketClient
         SocketClient();
         virtual ~SocketClient();
 
-        bool connect(const char *ipAddr, long port);
+        bool connect(const char *ipAddr, uint32_t port);
         void send(const std::string& message);
 
         pthread_mutex_t listenerLock;
@@ -24,8 +24,8 @@ class SocketClient
 
     private:
         const char* ipAddr;
-        long port;
-        int clientSocket;
+        uint32_t port;
+        uint32_t clientSocket;
 
         std::vector<std::string> messages_received;
 

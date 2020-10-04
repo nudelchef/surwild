@@ -15,7 +15,7 @@ public:
     Map();
     ~Map();
 
-    void LoadMap(const char *filename);
+    void LoadMap(const std::string& filename);
     void renderMap();
 
     int getTotalMapWidth()
@@ -27,27 +27,27 @@ public:
         return mapHeight * dest.h;
     }
 
-    bool canTravel(int tileX, int tileY);
+    bool canTravel(uint16_t tileX, uint16_t tileY);
 
 protected:
 
 private:
     SDL_Rect src, dest;
 
-    int* map;
+    uint16_t* map;
 
-    std::map<int, SDL_Texture*> map_atlas;
+    std::map<uint16_t, SDL_Texture*> map_atlas;
 
     std::string mapName;
-    int mapWidth;
-    int mapHeight;
+    uint16_t mapWidth;
+    uint16_t mapHeight;
 
-    void setMapProperty(std::string object_name, std::string object_data);
+    void setMapProperty(std::string& object_name, std::string& object_data);
 
-    void setPropertyMapName(std::string object_data);
-    void setPropertyMapDimension(std::string object_data);
-    void setPropertyMapAtlas(std::string object_data);
-    void setPropertyMapData(std::string object_data);
+    void setPropertyMapName(std::string& object_data);
+    void setPropertyMapDimension(std::string& object_data);
+    void setPropertyMapAtlas(std::string& object_data);
+    void setPropertyMapData(std::string& object_data);
 
 };
 

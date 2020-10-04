@@ -8,11 +8,11 @@
 
 int main( int argc, char* args[] )
 {
-    const int FPS = 60;
-    const int frameDelay = 1000 / FPS;
+    const uint16_t FPS = 60;
+    const uint16_t frameDelay = 1000 / FPS;
 
-    Uint32 frameStart;
-    int frameTime;
+    uint32_t frameStart;
+    uint32_t frameTime;
 
 
     SocketClient client = SocketClient();

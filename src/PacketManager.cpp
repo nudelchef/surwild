@@ -55,7 +55,7 @@ namespace PACKET
         packetId = ntohs(static_cast<uint16_t>(std::stoul(line)));
 
         std::getline(p_stream, line, '\037');
-        playerId = ntohs(static_cast<unsigned int>(std::stoul(line)));
+        playerId = ntohs(static_cast<uint32_t>(std::stoul(line)));
     }
     UNREGISTER_PLAYER::UNREGISTER_PLAYER(Player* player) : PACKET(3) {
         playerId = player->playerId;
@@ -80,41 +80,29 @@ namespace PACKET
         packetId = ntohs(static_cast<uint16_t>(std::stoul(line)));
 
         std::getline(p_stream, line, '\037');
-        playerId = ntohs(static_cast<unsigned int>(std::stoul(line)));
+        playerId = ntohs(static_cast<uint32_t>(std::stoul(line)));
 
         std::getline(p_stream, line, '\037');
-        entityId = ntohs(static_cast<unsigned int>(std::stoul(line)));
+        entityId = ntohs(static_cast<uint32_t>(std::stoul(line)));
 
         std::getline(p_stream, textureString, '\037');
 
         std::getline(p_stream, line, '\037');
-        movementDirection = Direction(ntohs((unsigned short) std::stoul(line)));
+        movementDirection = Direction(ntohs((uint32_t) std::stoul(line)));
 
         std::getline(p_stream, line, '\037');
-        tilePositionX = ntohs(static_cast<unsigned short>(std::stoul(line)));
+        tilePositionX = ntohs(static_cast<uint32_t>(std::stoul(line)));
 
         std::getline(p_stream, line, '\037');
-        tilePositionY = ntohs(static_cast<unsigned short>(std::stoul(line)));
+        tilePositionY = ntohs(static_cast<uint32_t>(std::stoul(line)));
 
         std::getline(p_stream, line, '\037');
-        x = ntohs(static_cast<unsigned short>(std::stoul(line)));
+        x = ntohs(static_cast<uint32_t>(std::stoul(line)));
 
         std::getline(p_stream, line, '\037');
-        y = ntohs(static_cast<unsigned short>(std::stoul(line)));
-
-
-        // debug
-        std::cout << "\\\\ ID: " << packetId << std::endl;
-        std::cout << "\\ playerId: " << playerId << std::endl;
-        std::cout << "\\ entityId: " << entityId << std::endl;
-        std::cout << "\\ textureString: " << textureString << std::endl;
-        std::cout << "\\ movementDirection: " << movementDirection << std::endl;
-        std::cout << "\\ tilePositionX: " << tilePositionX << std::endl;
-        std::cout << "\\ tilePositionY: " << tilePositionY << std::endl;
-        std::cout << "\\ x: " << x << std::endl;
-        std::cout << "\\ y: " << y << std::endl;
-
+        y = ntohs(static_cast<uint32_t>(std::stoul(line)));
     }
+
     REGISTER_PLAYER::REGISTER_PLAYER(Player* player) : PACKET(4) {
         playerId = player->playerId;
         entityId = player->entityId;

@@ -26,10 +26,10 @@ void* SocketClient::listen(void *arg)
     constexpr size_t CHUNK_LENGTH = 1024;
     char buffer[CHUNK_LENGTH];
 
-    unsigned long bytesTotal;
-    unsigned long bytesToRead;
-    unsigned long bytesRead;
-    unsigned long bytesRemaining;
+    uint64_t bytesTotal;
+    uint64_t bytesToRead;
+    uint64_t bytesRead;
+    uint64_t bytesRemaining;
 
     std::string message;
 
@@ -37,11 +37,11 @@ void* SocketClient::listen(void *arg)
     {
 
         // READ MESSAGE LENGTH
-        if (recv(sock->clientSocket, buffer, sizeof(unsigned long), 0) != sizeof(unsigned long))
+        if (recv(sock->clientSocket, buffer, sizeof(uint64_t), 0) != sizeof(uint64_t))
         {
             break;
         }
-        memcpy(&bytesTotal, &buffer[0], sizeof(unsigned long));
+        memcpy(&bytesTotal, &buffer[0], sizeof(uint64_t));
 
         bytesTotal = ntohl((unsigned long) bytesTotal);
         bytesRemaining = bytesTotal;
@@ -135,7 +135,7 @@ void SocketClient::send(const std::string& message)
     } while (bytesRemaining > 0);
 }
 
-bool SocketClient::connect(const char *ipAddr_, long port_)
+bool SocketClient::connect(const char *ipAddr_, uint32_t port_)
 {
     ipAddr = ipAddr_;
     port = port_;

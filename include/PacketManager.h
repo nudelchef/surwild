@@ -39,7 +39,7 @@ namespace PACKET {
 
     struct UNREGISTER_PLAYER : PACKET {
     public:
-        unsigned int playerId;
+        uint32_t playerId;
 
         UNREGISTER_PLAYER(std::string packet);
         UNREGISTER_PLAYER(Player* player);
@@ -49,18 +49,18 @@ namespace PACKET {
 
     struct REGISTER_PLAYER : PACKET {
     public:
-        unsigned int playerId;
-        unsigned int entityId;
+        uint32_t playerId;
+        uint32_t entityId;
 
 
         std::string textureString;
 
         Direction movementDirection;
-        unsigned short tilePositionX;
-        unsigned short tilePositionY;
+        uint32_t tilePositionX;
+        uint32_t tilePositionY;
 
-        unsigned short x;
-        unsigned short y;
+        uint32_t x;
+        uint32_t y;
 
 
         REGISTER_PLAYER(std::string packet);
