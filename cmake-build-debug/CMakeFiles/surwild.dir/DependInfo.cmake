@@ -1,24 +1,23 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
   )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/workspace/dev/c/workspace/surwild/src/Camera.cpp" "/workspace/dev/c/workspace/surwild/cmake-build-debug/CMakeFiles/surwild.dir/src/Camera.cpp.o"
-  "/workspace/dev/c/workspace/surwild/src/Entity.cpp" "/workspace/dev/c/workspace/surwild/cmake-build-debug/CMakeFiles/surwild.dir/src/Entity.cpp.o"
-  "/workspace/dev/c/workspace/surwild/src/Game.cpp" "/workspace/dev/c/workspace/surwild/cmake-build-debug/CMakeFiles/surwild.dir/src/Game.cpp.o"
-  "/workspace/dev/c/workspace/surwild/src/Map.cpp" "/workspace/dev/c/workspace/surwild/cmake-build-debug/CMakeFiles/surwild.dir/src/Map.cpp.o"
-  "/workspace/dev/c/workspace/surwild/src/Player.cpp" "/workspace/dev/c/workspace/surwild/cmake-build-debug/CMakeFiles/surwild.dir/src/Player.cpp.o"
-  "/workspace/dev/c/workspace/surwild/src/StringUtils.cpp" "/workspace/dev/c/workspace/surwild/cmake-build-debug/CMakeFiles/surwild.dir/src/StringUtils.cpp.o"
-  "/workspace/dev/c/workspace/surwild/src/TextureManager.cpp" "/workspace/dev/c/workspace/surwild/cmake-build-debug/CMakeFiles/surwild.dir/src/TextureManager.cpp.o"
-  "/workspace/dev/c/workspace/surwild/src/main.cpp" "/workspace/dev/c/workspace/surwild/cmake-build-debug/CMakeFiles/surwild.dir/src/main.cpp.o"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "../include"
-  "../src"
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/root/CLionProjects/surwild/src/Camera.cpp" "CMakeFiles/surwild.dir/src/Camera.cpp.o" "gcc" "CMakeFiles/surwild.dir/src/Camera.cpp.o.d"
+  "/root/CLionProjects/surwild/src/Entity.cpp" "CMakeFiles/surwild.dir/src/Entity.cpp.o" "gcc" "CMakeFiles/surwild.dir/src/Entity.cpp.o.d"
+  "/root/CLionProjects/surwild/src/Game.cpp" "CMakeFiles/surwild.dir/src/Game.cpp.o" "gcc" "CMakeFiles/surwild.dir/src/Game.cpp.o.d"
+  "/root/CLionProjects/surwild/src/Map.cpp" "CMakeFiles/surwild.dir/src/Map.cpp.o" "gcc" "CMakeFiles/surwild.dir/src/Map.cpp.o.d"
+  "/root/CLionProjects/surwild/src/PacketManager.cpp" "CMakeFiles/surwild.dir/src/PacketManager.cpp.o" "gcc" "CMakeFiles/surwild.dir/src/PacketManager.cpp.o.d"
+  "/root/CLionProjects/surwild/src/Player.cpp" "CMakeFiles/surwild.dir/src/Player.cpp.o" "gcc" "CMakeFiles/surwild.dir/src/Player.cpp.o.d"
+  "/root/CLionProjects/surwild/src/SocketClient.cpp" "CMakeFiles/surwild.dir/src/SocketClient.cpp.o" "gcc" "CMakeFiles/surwild.dir/src/SocketClient.cpp.o.d"
+  "/root/CLionProjects/surwild/src/StringUtils.cpp" "CMakeFiles/surwild.dir/src/StringUtils.cpp.o" "gcc" "CMakeFiles/surwild.dir/src/StringUtils.cpp.o.d"
+  "/root/CLionProjects/surwild/src/TextureManager.cpp" "CMakeFiles/surwild.dir/src/TextureManager.cpp.o" "gcc" "CMakeFiles/surwild.dir/src/TextureManager.cpp.o.d"
+  "/root/CLionProjects/surwild/src/main.cpp" "CMakeFiles/surwild.dir/src/main.cpp.o" "gcc" "CMakeFiles/surwild.dir/src/main.cpp.o.d"
   )
 
 # Targets to which this target links.

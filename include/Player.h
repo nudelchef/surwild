@@ -4,16 +4,17 @@
 #include "Entity.h"
 #include "PacketManager.h"
 
-class Player: public Entity
-{
+class Player : public Entity {
 public:
     Player();
-    virtual ~Player();
 
-    uint32_t playerId;
+    ~Player() override;
 
-    void setData(PACKET::REGISTER_PLAYER data);
-    void update();
+    uint32_t playerId{};
+
+    void setData(const PACKET::REGISTER_PLAYER &data);
+
+    void update() override;
 
 protected:
 

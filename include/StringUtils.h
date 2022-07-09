@@ -3,10 +3,9 @@
 
 #include <string>
 
-namespace StringUtils
-{
+namespace StringUtils {
 
-std::string removeSpaces(std::string str);
+    std::string removeSpaces(std::string str);
 
 }
 

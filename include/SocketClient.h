@@ -5,31 +5,32 @@
 #include <string>
 #include <vector>
 
-void* run(void*);
+void *run(void *);
 
-class SocketClient
-{
-    public:
-        SocketClient();
-        virtual ~SocketClient();
+class SocketClient {
+public:
+    SocketClient();
 
-        bool connect(const char *ipAddr, uint32_t port);
-        void send(const std::string& message);
+    virtual ~SocketClient();
 
-        pthread_mutex_t listenerLock;
+    bool connect(const char *ipAddr, int port);
 
-        std::string pthread_pop();
+    void send(const std::string &message) const;
 
-    protected:
+    pthread_mutex_t listenerLock{};
 
-    private:
-        const char* ipAddr;
-        uint32_t port;
-        uint32_t clientSocket;
+    std::string pthread_pop();
 
-        std::vector<std::string> messages_received;
+protected:
 
-        static void* listen(void *arg);
+private:
+    const char *ipAddr{};
+    int port{};
+    int clientSocket{};
+
+    std::vector<std::string> messages_received;
+
+    static void *listen(void *arg);
 };
 
 #endif // SOCKETCLIENT_H

@@ -8,6 +8,7 @@
 #endif
 
 #include <map>
+#include <string>
 
 class Map
 {
@@ -18,36 +19,38 @@ public:
     void LoadMap(const std::string& filename);
     void renderMap();
 
-    int getTotalMapWidth()
-    {
+    int getTotalMapWidth() const {
         return mapWidth * dest.w;
     }
-    int getTotalMapHeight()
-    {
+
+    int getTotalMapHeight() const {
         return mapHeight * dest.h;
     }
 
-    bool canTravel(uint16_t tileX, uint16_t tileY);
+    bool canTravel(uint16_t tileX, uint16_t tileY) const;
 
 protected:
 
 private:
-    SDL_Rect src, dest;
+    SDL_Rect src{}, dest{};
 
-    uint16_t* map;
+    uint16_t *map{};
 
-    std::map<uint16_t, SDL_Texture*> map_atlas;
+    std::map<uint16_t, SDL_Texture *> map_atlas;
 
     std::string mapName;
-    uint16_t mapWidth;
-    uint16_t mapHeight;
+    uint16_t mapWidth{};
+    uint16_t mapHeight{};
 
-    void setMapProperty(std::string& object_name, std::string& object_data);
+    void setMapProperty(std::string &object_name, std::string &object_data);
 
-    void setPropertyMapName(std::string& object_data);
-    void setPropertyMapDimension(std::string& object_data);
-    void setPropertyMapAtlas(std::string& object_data);
-    void setPropertyMapData(std::string& object_data);
+    void setPropertyMapName(std::string &object_data);
+
+    void setPropertyMapDimension(std::string &object_data);
+
+    void setPropertyMapAtlas(std::string &object_data);
+
+    void setPropertyMapData(std::string &object_data);
 
 };
 

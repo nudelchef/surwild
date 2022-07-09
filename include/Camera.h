@@ -9,13 +9,11 @@ public:
     Camera(uint16_t width, uint16_t height);
     virtual ~Camera();
 
-    int getX()
-    {
+    int getX() const {
         return x;
     }
 
-    int getY()
-    {
+    int getY() const {
         return y;
     }
 
