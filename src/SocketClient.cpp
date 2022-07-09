@@ -17,8 +17,7 @@
 #define COLOR_MAGENTA "\e[95m"
 #define COLOR_CLEAR "\e[39m"
 
-void* SocketClient::listen(void *arg)
-{
+void *SocketClient::listen(void *arg) {
     SocketClient *sock = (SocketClient *) arg;
 
     sock->listenerLock = PTHREAD_MUTEX_INITIALIZER;
@@ -33,12 +32,10 @@ void* SocketClient::listen(void *arg)
 
     std::string message;
 
-    while(true)
-    {
+    while (true) {
 
         // READ MESSAGE LENGTH
-        if (recv(sock->clientSocket, buffer, sizeof(uint64_t), 0) != sizeof(uint64_t))
-        {
+        if (recv(sock->clientSocket, buffer, sizeof(uint64_t), 0) != sizeof(uint64_t)) {
             break;
         }
         memcpy(&bytesTotal, &buffer[0], sizeof(uint64_t));
@@ -48,8 +45,7 @@ void* SocketClient::listen(void *arg)
 
         // READ MESSAGE
         message = "";
-        do
-        {
+        do {
             bytesToRead = std::min(CHUNK_LENGTH, bytesRemaining);
 
             bytesRead = recv(sock->clientSocket, &buffer, bytesToRead, 0);
@@ -83,8 +79,7 @@ void* SocketClient::listen(void *arg)
     pthread_exit(NULL);
 }
 
-std::string SocketClient::pthread_pop()
-{
+std::string SocketClient::pthread_pop() {
     std::string message;
 
     int rc = pthread_mutex_lock(&listenerLock);
@@ -107,8 +102,7 @@ std::string SocketClient::pthread_pop()
     return message;
 }
 
-void SocketClient::send(const std::string& message)
-{
+void SocketClient::send(const std::string &message) {
     constexpr size_t CHUNK_LENGTH = 1024;
     const size_t bytesTotal = message.length();
     size_t bytesRemaining = bytesTotal;
@@ -119,12 +113,11 @@ void SocketClient::send(const std::string& message)
 
 
     unsigned long lengthValue = htonl((unsigned long) bytesTotal);
-    if (::send(clientSocket, (const char*)&lengthValue, sizeof(lengthValue), 0) < 0) {
+    if (::send(clientSocket, (const char *) &lengthValue, sizeof(lengthValue), 0) < 0) {
         return;
     }
 
-    do
-    {
+    do {
         bytesToSend = std::min(CHUNK_LENGTH, bytesRemaining);
 
         bytesSent = ::send(clientSocket, message.c_str() + (bytesTotal - bytesRemaining), bytesToSend, 0);
@@ -135,8 +128,7 @@ void SocketClient::send(const std::string& message)
     } while (bytesRemaining > 0);
 }
 
-bool SocketClient::connect(const char *ipAddr_, uint32_t port_)
-{
+bool SocketClient::connect(const char *ipAddr_, uint32_t port_) {
     ipAddr = ipAddr_;
     port = port_;
     std::cout << COLOR_MAGENTA << "Connecting to " << ipAddr << ", " << port << COLOR_CLEAR << std::endl;
@@ -152,28 +144,26 @@ bool SocketClient::connect(const char *ipAddr_, uint32_t port_)
     serverAddr.sin_addr.s_addr = inet_addr(ipAddr);
 
     //Connect the socket to the server using the address
-    addr_size = sizeof( serverAddr );
-    if ( ::connect(clientSocket, (struct sockaddr *) &serverAddr, addr_size) < 0)
-    {
-        std::cout << COLOR_MAGENTA << "Failed to connect: " << strerror(errno) << " (" << errno << ")" << COLOR_CLEAR << std::endl;
+    addr_size = sizeof(serverAddr);
+    if (::connect(clientSocket, (struct sockaddr *) &serverAddr, addr_size) < 0) {
+        std::cout << COLOR_MAGENTA << "Failed to connect: " << strerror(errno) << " (" << errno << ")" << COLOR_CLEAR
+                  << std::endl;
         return false;
     }
 
     std::cout << COLOR_MAGENTA << "Connection established" << COLOR_CLEAR << std::endl;
 
     pthread_t thread;
-    if( pthread_create(&thread, NULL, SocketClient::listen, this ) )
+    if (pthread_create(&thread, NULL, SocketClient::listen, this))
         std::cout << "Failed to create thread" << std::endl;
 
     return true;
 }
 
-SocketClient::SocketClient()
-{
+SocketClient::SocketClient() {
 
 }
 
-SocketClient::~SocketClient()
-{
+SocketClient::~SocketClient() {
     //dtor
 }

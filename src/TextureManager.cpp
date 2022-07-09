@@ -4,23 +4,20 @@
 
 #include <SDL2/SDL_image.h>
 
-namespace TextureManager
-{
-SDL_Texture* LoadTexture(const std::string& filename)
-{
-    std::cout << "<info> [TextureManager] Loading file: " << filename << std::endl;
+namespace TextureManager {
+    SDL_Texture *LoadTexture(const std::string &filename) {
+        std::cout << "<info> [TextureManager] Loading file: " << filename << std::endl;
 
-    SDL_Surface* tempSurface = IMG_Load(filename.c_str());
-    SDL_Texture* tex = SDL_CreateTextureFromSurface(Game::renderer, tempSurface);
-    SDL_FreeSurface(tempSurface);
+        SDL_Surface *tempSurface = IMG_Load(filename.c_str());
+        SDL_Texture *tex = SDL_CreateTextureFromSurface(Game::renderer, tempSurface);
+        SDL_FreeSurface(tempSurface);
 
-    return tex;
-}
+        return tex;
+    }
 
-void render(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest)
-{
-    SDL_RenderCopy(Game::renderer, tex, &src, &dest);
-}
+    void render(SDL_Texture *tex, SDL_Rect src, SDL_Rect dest) {
+        SDL_RenderCopy(Game::renderer, tex, &src, &dest);
+    }
 }
 
 

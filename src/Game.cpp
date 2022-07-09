@@ -11,44 +11,37 @@
 #include "Player.h"
 #include "SocketClient.h"
 
-SDL_Renderer* Game::renderer = nullptr;
+SDL_Renderer *Game::renderer = nullptr;
 
 
-Camera* Game::camera = nullptr;
-Map* Game::map = nullptr;
-Player* Game::player = nullptr;
-SocketClient* Game::client = nullptr;
+Camera *Game::camera = nullptr;
+Map *Game::map = nullptr;
+Player *Game::player = nullptr;
+SocketClient *Game::client = nullptr;
 
 
-
-Game::Game(SocketClient *client_)
-{
+Game::Game(SocketClient *client_) {
     Game::client = client_;
 }
 
-Game::~Game()
-{
+Game::~Game() {
 }
 
 
-const uint8_t* keys = SDL_GetKeyboardState(NULL);
+const uint8_t *keys = SDL_GetKeyboardState(NULL);
 
 
-
-void Game::init(const char* title, uint32_t xpos, uint32_t ypos, uint32_t width, uint32_t height, bool fullscreen)
-{
+void Game::init(const char *title, uint32_t xpos, uint32_t ypos, uint32_t width, uint32_t height, bool fullscreen) {
     uint32_t flags = 0;
 
     if (fullscreen)
         flags = SDL_WINDOW_FULLSCREEN;
 
-    if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
-    {
+    if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
         std::cout << "SDL initialised." << std::endl;
 
         window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
-        if (window)
-        {
+        if (window) {
             std::cout << "SDL Window created." << std::endl;
         }
 
@@ -58,16 +51,13 @@ void Game::init(const char* title, uint32_t xpos, uint32_t ypos, uint32_t width,
         /*</icon>*/
 
         renderer = SDL_CreateRenderer(window, -1, 0);
-        if (renderer)
-        {
+        if (renderer) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
             std::cout << "SDL Renderer created." << std::endl;
         }
 
         isRunning = true;
-    }
-    else
-    {
+    } else {
         isRunning = false;
     }
 
@@ -77,36 +67,33 @@ void Game::init(const char* title, uint32_t xpos, uint32_t ypos, uint32_t width,
     player = new Player();
 }
 
-void Game::handleEvents()
-{
+void Game::handleEvents() {
     SDL_Event event;
     SDL_PollEvent(&event);
 
-    switch (event.type)
-    {
-    case SDL_QUIT:
-        isRunning = false;
-        break;
-    case SDL_KEYDOWN:
+    switch (event.type) {
+        case SDL_QUIT:
+            isRunning = false;
+            break;
+        case SDL_KEYDOWN:
 
-        break;
-    case SDL_KEYUP:
+            break;
+        case SDL_KEYUP:
 
-        break;
-    default:
-        break;
+            break;
+        default:
+            break;
     }
 }
 
-void Game::handleNetcode(const std::string& message)
-{
+void Game::handleNetcode(const std::string &message) {
     std::stringstream m_stream(message);
     std::string line;
     std::getline(m_stream, line, '\037');
 
     uint16_t packetId = ntohs((uint16_t) std::stoul(line));
 
-    switch(packetId) {
+    switch (packetId) {
         case 0: // PACKET
             break;
         case 1: // DISCONNECT
@@ -126,12 +113,10 @@ void Game::handleNetcode(const std::string& message)
     }
 }
 
-void Game::update()
-{
+void Game::update() {
     // receive network messages
     std::string message = client->pthread_pop();
-    while(!message.empty())
-    {
+    while (!message.empty()) {
         handleNetcode(message);
 
         message = client->pthread_pop();
@@ -143,8 +128,7 @@ void Game::update()
     camera->clamp(0, 0, map->getTotalMapWidth(), map->getTotalMapHeight());
 }
 
-void Game::render()
-{
+void Game::render() {
     SDL_RenderClear(renderer);
 
     map->renderMap();
@@ -153,8 +137,7 @@ void Game::render()
     SDL_RenderPresent(renderer);
 }
 
-void Game::clean()
-{
+void Game::clean() {
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();

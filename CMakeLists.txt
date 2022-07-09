@@ -1,13 +1,13 @@
-cmake_minimum_required(VERSION 3.16)
-project(surwild)
+cmake_minimum_required(VERSION 3.7)
 
 set(CMAKE_CXX_STANDARD 14)
 set("${CMAKE_CXX_FLAGS} -pthread")
 
-include_directories(include)
-include_directories(src)
+project(surwild)
 
-add_executable(surwild
+find_package(SDL2 REQUIRED)
+
+set(SOURCES
         include/Camera.h
         include/Direction.h
         include/Entity.h
@@ -23,7 +23,13 @@ add_executable(surwild
         src/Map.cpp
         src/Player.cpp
         src/StringUtils.cpp
-        src/TextureManager.cpp)
+        src/TextureManager.cpp
+        )
 
-INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS})
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+include_directories(include)
+include_directories(src)
+
+include_directories(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
